@@ -1,0 +1,11 @@
+---
+config:
+  theme: neo-dark
+---
+sequenceDiagram
+  actor A1 as Usuario
+  actor A2 as navegador
+  actor A3 as servidor
+  A1 ->> A2: Envia o formulário
+  A2 ->> A3: Requisição HTTP POST para o endereço new_note_spa
+  A3 -->> A2: status HTTP 201

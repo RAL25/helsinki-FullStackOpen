@@ -1,0 +1,15 @@
+---
+config:
+  theme: neo-dark
+---
+sequenceDiagram
+  actor A2 as navegador
+  actor A3 as servidor
+  A2 ->> A3: GET spa
+  A3 -->> A2: HTML
+  A2 ->> A3: GET main.css
+  A3 -->> A2: CSS
+  A2 ->> A3: GET spa.js
+  A3 -->> A2: Javascript
+  A2 ->> A3: GET data.json
+  A3 -->> A2: JSON
