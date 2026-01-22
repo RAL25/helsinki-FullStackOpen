@@ -1,11 +1,13 @@
+import personService from "../service/persons";
+
 const PersonForm = (props) => {
   const addName = (event) => {
     event.preventDefault();
     const algoNome = props.persons.find(
-      (person) => person.name === props.newName
+      (person) => person.name === props.newName,
     );
     const algoNumero = props.persons.find(
-      (person) => person.number === props.newNumber
+      (person) => person.number === props.newNumber,
     );
 
     if (algoNome) {
@@ -16,15 +18,18 @@ const PersonForm = (props) => {
       return;
     }
 
+    let aux = props.persons.length + 1;
     const nameObject = {
       name: props.newName,
       number: props.newNumber,
-      id: props.persons.length + 1,
+      id: aux.toString(),
     };
 
-    props.setPersons(props.persons.concat(nameObject));
-    props.setNewName("");
-    props.setNewNumber("");
+    personService.create(nameObject).then((response) => {
+      props.setPersons(props.persons.concat(response.data));
+      props.setNewName("");
+      props.setNewNumber("");
+    });
   };
 
   return (
