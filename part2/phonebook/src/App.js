@@ -12,6 +12,7 @@ const App = (props) => {
 
   useEffect(() => {
     console.log("effect");
+
     personService.getAll().then((response) => {
       setPersons(response.data);
     });
@@ -31,7 +32,11 @@ const App = (props) => {
         setNewNumber={setNewNumber}
       />
       <h2>Numbers</h2>
-      <Person searchName={searchName} persons={persons} />
+      <Person
+        searchName={searchName}
+        persons={persons}
+        setPerson={setPersons}
+      />
     </div>
   );
 };

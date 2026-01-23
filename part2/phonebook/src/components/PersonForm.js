@@ -11,7 +11,26 @@ const PersonForm = (props) => {
     );
 
     if (algoNome) {
-      window.alert(`${props.newName} is already added to phonebook`);
+      // window.alert(`${props.newName} is already added to phonebook`);
+      if (
+        window.confirm(
+          `${props.newName} is already added to phonebook, replace the old number with a new one?`,
+        )
+      ) {
+        const changeObject = { ...algoNome, number: props.newNumber };
+        personService.update(algoNome.id, changeObject).then((response) => {
+          props.setPersons(
+            props.persons.map((p) =>
+              p.id !== algoNome.id ? p : response.data,
+            ),
+          );
+          props.setNewName("");
+          props.setNewNumber("");
+        });
+        console.log("Item updated!");
+      } else {
+        console.log("Item don't updated!");
+      }
       return;
     } else if (algoNumero) {
       window.alert(`${props.newNumber} is already added to phonebook`);
