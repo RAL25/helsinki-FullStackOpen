@@ -1,5 +1,12 @@
 import personService from "../service/persons";
 
+const DoneMessage = (setMessage, showMessage) => {
+  setMessage(`${showMessage}`);
+  setTimeout(() => {
+    setMessage(null);
+  }, 5000);
+};
+
 const PersonForm = (props) => {
   const addName = (event) => {
     event.preventDefault();
@@ -9,9 +16,9 @@ const PersonForm = (props) => {
     const algoNumero = props.persons.find(
       (person) => person.number === props.newNumber,
     );
+    let showMessage = "";
 
     if (algoNome) {
-      // window.alert(`${props.newName} is already added to phonebook`);
       if (
         window.confirm(
           `${props.newName} is already added to phonebook, replace the old number with a new one?`,
@@ -31,6 +38,10 @@ const PersonForm = (props) => {
       } else {
         console.log("Item don't updated!");
       }
+
+      showMessage = `Added ${props.newNumber} to ${props.newName}`;
+      DoneMessage(props.setMessage, showMessage);
+
       return;
     } else if (algoNumero) {
       window.alert(`${props.newNumber} is already added to phonebook`);
@@ -43,6 +54,9 @@ const PersonForm = (props) => {
       number: props.newNumber,
       id: aux.toString(),
     };
+
+    showMessage = `Added new person ${props.newName}`;
+    DoneMessage(props.setMessage, showMessage);
 
     personService.create(nameObject).then((response) => {
       props.setPersons(props.persons.concat(response.data));

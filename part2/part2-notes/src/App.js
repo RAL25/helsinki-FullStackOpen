@@ -3,36 +3,32 @@ import { useState, useEffect } from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
 
+const Footer = () => {
+  const footerStyle = {
+    color: 'green',
+    fontStyle: 'italic',
+    fontSize: 16,
+  }
+  return (
+    <div style={footerStyle}>
+      <br />
+      <em>
+        Note app, Department of Computer Science, University of Helsinki 2022
+      </em>
+    </div>
+  )
+}
+
 const App = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('a new note...')
   const [showAll, setShowAll] = useState(true)
 
-  // const hook = () => {
-  //   console.log('effect (efeito)')
-  //   axios.get('http://localhost:3001/notes').then((response) => {
-  //     console.log('promise fulfilled (promessa resolvida)')
-  //     setNotes(response.data)
-  //   })
-  // }
-
-  // useEffect(hook, [])
   useEffect(() => {
     noteService.getAll().then((response) => {
       setNotes(response.data)
     })
   }, [])
-  // console.log('render (renderiza)', notes.length, 'notes (notas)')
-
-  // const toggleImportanceOf = (id) => {
-  //   const url = `http://localhost:3001/notes/${id}`
-  //   const note = notes.find((n) => n.id === id)
-  //   const changedNote = { ...note, important: !note.important }
-
-  // axios.put(url, changedNote).then((response) => {
-  //   setNotes(notes.map((n) => (n.id !== id ? n : response.data)))
-  // })
-  // }
 
   const toggleImportanceOf = (id) => {
     const note = notes.find((n) => n.id === id)
@@ -52,18 +48,10 @@ const App = () => {
       id: aux.toString(),
     }
 
-    // axios.post('http://localhost:3001/notes', noteObject).then((response) => {
-    //   setNotes(notes.concat(response.data))
-    //   setNewNote('')
-    // })
-
     noteService.create(noteObject).then((response) => {
       setNotes(notes.concat(response.data))
       setNewNote('')
     })
-
-    // setNotes(notes.concat(noteObject))
-    // setNewNote('')
   }
 
   const handleNoteChange = (event) => {
@@ -96,6 +84,7 @@ const App = () => {
         <input value={newNote} onChange={handleNoteChange} />
         <button type="submit">save</button>
       </form>
+      <Footer />
     </div>
   )
 }
