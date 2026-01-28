@@ -1,21 +1,21 @@
 const CountrieDetails = ({ countrie }) => {
-  const countrieLanguages = Object.values(countrie[0].languages);
+  const keyLanguages = Object.keys(countrie.languages);
   return (
     <div>
-      <h1>{countrie[0].name.common}</h1>
+      <h1>{countrie.name.common}</h1>
       <p>
-        Capital {countrie[0].capital}
+        Capital {countrie.capital}
         <br />
-        Area {countrie[0].area}
+        Area {countrie.area}
       </p>
       <h2>Languages</h2>
       <ul>
-        {countrieLanguages.map((language) => (
-          <li>{language}</li>
+        {keyLanguages.map((key) => (
+          <li key={key}>{countrie.languages[key]}</li>
         ))}
       </ul>
       <img
-        src={countrie[0].flags.svg}
+        src={countrie.flags.svg}
         style={{ width: "200px", border: "1px solid #ccc" }}
       />
     </div>

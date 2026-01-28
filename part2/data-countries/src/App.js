@@ -8,9 +8,12 @@ function App() {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    axios.get(baseUrl).then((response) => {
-      setCountries(response.data);
-    });
+    const searchData = async () => {
+      await axios.get(baseUrl).then((response) => {
+        setCountries(response.data);
+      });
+    };
+    searchData();
   }, []);
 
   const handleChange = (event) => {
