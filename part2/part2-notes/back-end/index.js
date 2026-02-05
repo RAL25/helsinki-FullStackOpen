@@ -1,4 +1,6 @@
 const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
 const app = express();
 
 app.use(express.json());
@@ -20,6 +22,9 @@ let notes = [
     important: true,
   },
 ];
+
+app.use(morgan("dev"));
+app.use(cors());
 
 app.get("/", (request, response) => {
   response.send("<h1>Hello, World!<h1/>");
@@ -44,9 +49,9 @@ app.post("/api/notes", (request, response) => {
   }
 
   const note = {
+    id: generateId(),
     content: body.content,
     important: body.important || false,
-    id: generateId(),
   };
 
   notes = notes.concat(note);
@@ -66,6 +71,6 @@ app.get("/api/notes/:id", (request, response) => {
   response.json(note);
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT);
 console.log(`Server running on port ${PORT}`);

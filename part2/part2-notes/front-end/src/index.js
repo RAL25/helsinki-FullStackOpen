@@ -2,11 +2,11 @@ import ReactDOM from 'react-dom/client'
 
 import App from './App'
 
-import axios from 'axios'
+// import axios from 'axios'
 
 import './index.css'
 
-const promise = axios.get('http://localhost:3001/notes')
-console.log(promise)
+// const promise = axios.get('http://localhost:3001/notes')
+// console.log(promise)
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)

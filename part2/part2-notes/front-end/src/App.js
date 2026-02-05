@@ -47,9 +47,9 @@ const App = () => {
     event.preventDefault()
     let aux = notes.length + 1
     const noteObject = {
+      id: aux.toString(),
       content: newNote,
       important: Math.random() < 0.5,
-      id: aux.toString(),
     }
 
     noteService.create(noteObject).then((response) => {
