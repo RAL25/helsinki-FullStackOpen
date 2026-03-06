@@ -37,6 +37,7 @@ const App = (props) => {
         setNewName={setNewName}
         setNewNumber={setNewNumber}
         setMessage={setMessage}
+        setMessageError={setMessageError}
       />
       <h2>Numbers</h2>
       <Person

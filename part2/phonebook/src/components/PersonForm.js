@@ -55,14 +55,17 @@ const PersonForm = (props) => {
       id: aux.toString(),
     };
 
-    showMessage = `Added new person ${props.newName}`;
-    DoneMessage(props.setMessage, showMessage);
-
-    personService.create(nameObject).then((response) => {
-      props.setPersons(props.persons.concat(response.data));
-      props.setNewName("");
-      props.setNewNumber("");
-    });
+    personService
+      .create(nameObject)
+      .then((response) => {
+        DoneMessage(props.setMessage, `Added new person ${props.newName}`);
+        props.setPersons(props.persons.concat(response.data));
+        props.setNewName("");
+        props.setNewNumber("");
+      })
+      .catch((error) => {
+        DoneMessage(props.setMessageError, error.response.data.error);
+      });
   };
 
   return (

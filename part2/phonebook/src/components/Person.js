@@ -1,12 +1,6 @@
 import PersonDelete from "./PersonDelete";
 
-const Person = ({
-  searchName,
-  persons,
-  setPerson,
-  setMessage,
-  setTypeMessage,
-}) => {
+const Person = ({ searchName, persons, setPerson, setMessage }) => {
   const personsFilter = persons.filter((person) =>
     person.name.toLowerCase().includes(searchName.toLowerCase()),
   );
@@ -21,7 +15,6 @@ const Person = ({
             persons={persons}
             setPerson={setPerson}
             setMessage={setMessage}
-            setTypeMessage={setTypeMessage}
           />
         </li>
       ))}
